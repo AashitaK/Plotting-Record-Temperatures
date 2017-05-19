@@ -11,34 +11,6 @@
     "\n",
     "National Oceanic and Atmospheric Administration(NOAA) dataset has been stored in the file `data_temperatures_nola.csv`. The data contains daily climate records coming from the 12 stations of The National Centers for Environmental Information (NCEI) [Daily Global Historical Climatology Network](https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/readme.txt) (GHCN-Daily)  near **New Orleans, Louisiana, United States** over the period from Jan 01, 2005 to Dec 31, 2015. \n",
     "\n",
-    "The code is written for Python 3.6. Though it runs for Python 2 versions, the visuals, especially the colors that are taken from the Google Material Design color palette, are less appealing."
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "First we read the data from the file `data_temperatures_nola.csv` into the pandas dataframe `df`:"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "metadata": {
-    "collapsed": true
-   },
-   "outputs": [],
-   "source": [
-    "import pandas as pd\n",
-    "import numpy as np\n",
-    "filename = \"data_temperatures_nola.csv\"\n",
-    "df = pd.read_csv(filename)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
     "Each row in the datafile corresponds to a single observation. There are four columns in the datafile as follows:\n",
     "* **ID** : station identification code\n",
     "* **Date** : date in YYYY-MM-DD format (e.g. 2012-01-24 = January 24, 2012)\n",
@@ -46,101 +18,8 @@
     "    * TMAX : Maximum temperature \n",
     "    * TMIN : Minimum temperature \n",
     "* **Data_Value** : data value for element (tenths of degrees C)\n",
-    "\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "metadata": {
-    "collapsed": false
-   },
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>ID</th>\n",
-       "      <th>Date</th>\n",
-       "      <th>Element</th>\n",
-       "      <th>Data_Value</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>0</th>\n",
-       "      <td>USW00053917</td>\n",
-       "      <td>2005-07-06</td>\n",
-       "      <td>TMAX</td>\n",
-       "      <td>306</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>1</th>\n",
-       "      <td>USW00012884</td>\n",
-       "      <td>2011-10-05</td>\n",
-       "      <td>TMIN</td>\n",
-       "      <td>211</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>2</th>\n",
-       "      <td>USC00168941</td>\n",
-       "      <td>2014-09-16</td>\n",
-       "      <td>TMIN</td>\n",
-       "      <td>233</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>3</th>\n",
-       "      <td>USC00166676</td>\n",
-       "      <td>2012-07-20</td>\n",
-       "      <td>TMIN</td>\n",
-       "      <td>239</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>4</th>\n",
-       "      <td>USC00168941</td>\n",
-       "      <td>2009-04-22</td>\n",
-       "      <td>TMAX</td>\n",
-       "      <td>283</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "            ID        Date Element  Data_Value\n",
-       "0  USW00053917  2005-07-06    TMAX         306\n",
-       "1  USW00012884  2011-10-05    TMIN         211\n",
-       "2  USC00168941  2014-09-16    TMIN         233\n",
-       "3  USC00166676  2012-07-20    TMIN         239\n",
-       "4  USC00168941  2009-04-22    TMAX         283"
-      ]
-     },
-     "execution_count": 3,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "df.head(5)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "The dataframe has temperatures for New Orleans from multiple locations in the city and taken at multiple \n",
-    "times of the day from Jan 01, 2005 to Dec 31, 2015. Temperatures are given at tenths of degrees celsius."
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Now we prepare the dataframe 'df' to extract the desired data:"
+    "\n",
+    "The code is written for Python 3.6. Though it runs for Python 2 versions, the visuals, especially the colors that are taken from the Google Material Design color palette, are less appealing."
    ]
   },
   {
@@ -151,6 +30,15 @@
    },
    "outputs": [],
    "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "filename = \"data_temperatures_nola.csv\"\n",
+    "df = pd.read_csv(filename) # Reads the data from the csv file into pandas dataframe\n",
+    "# The dataframe has temperatures for New Orleans from multiple locations in the city and taken at multiple \n",
+    "# times of the day from Jan 01, 2005 to Dec 31, 2015.\n",
+    "# Temperatures are given at tenths of degrees celsius.\n",
+    "\n",
+    "# The following is preparing the dataframe to extract the desired data\n",
     "df.loc[:,'Data_Value'] *= 0.1 # Dividing all temperature entries by 10 to convert them to degree celsius\n",
     "df['Date'] = pd.to_datetime(df['Date']) # Changing the dtype of the date to pandas datetime \n",
     "\n",
