@@ -5,3 +5,5 @@ period 2005-2014 using `pandas`. These highs and lows are plotted as line graphs
 The data used can be found at [The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily)](https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/readme.txt) and it contains daily climate records coming from the 12 stations near New Orleans over the period from Jan 01, 2005 to Dec 31, 2015.
 
 ![NolaTemp](NOLATemp.png)
+
+[Here](http://www.aashitak.com/articles/Plotting-Temperatures-NOLA) is a blog on this.
